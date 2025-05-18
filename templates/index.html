@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Select Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_main.css') }}">
+</head>
+
+<body>
+    <div class="coin-display">
+        💰 Coins: {{ coins }}
+    </div>
+    <div class="neurotutor-intro">
+        <h1><b>Welcome to NeuroTutor 🧠</b></h1>
+        <p><b>Level up your coding skills with AI-powered debugging, code challenges, and forgetting-curve-based mastery
+            tracking. Earn badges, gain coins, and become a code warrior!</b></p>
+    </div>
+    {% if badge_to_show and 'icon_filename' in badge_to_show %}
+    <div class="backdrop" id="backdrop" style="display: block;" onclick="closePopup()"></div>
+    <div class="badge-popup" id="badge-popup" style="display: block;">
+        <img src="{{ url_for('static', filename='images/' + badge_to_show['icon_filename']) }}"
+            alt="{{ badge_to_show['name'] }}">
+        <h2>🏅 Badge Unlocked: {{ badge_to_show['name'] }}</h2>
+        <p>{{ badge_to_show['description'] }}</p>
+        <div class="button-container">
+            <a href="/" class="btn">Okay</a>
+            <a href="/my-badges" class="btn">View Badges</a>
+        </div>
+    </div>
+    <script>
+        function closePopup() {
+            document.getElementById('badge-popup').style.display = 'none';
+            document.getElementById('backdrop').style.display = 'none';
+        }
+    </script>
+    {% endif %}
+
+    <div class="container">
+        <h1>Select a Tool</h1>
+        <div class="button-container">
+            <button class="button level-button" id="code-checker-btn" onclick="window.location.href='/code-checker'">
+                🧪 Python Code Checker
+            </button>
+            <button class="button level-button" id="code-checker-cpp-btn"
+                onclick="window.location.href='/code-checker-cpp'">
+                🧪 C++ Code Checker
+            </button>
+            <button class="button level-button" id="debugger-btn" onclick="window.location.href='/debugger-challenge'">
+                🐞 Debugger Challenge
+            </button>
+            <button class="button level-button" id="forgetting-btn" onclick="window.location.href='/forgetting'">
+                🧠 Code Solver (Forgetting Graph)
+            </button>
+            <button class="button level-button" id="report-btn" onclick="window.location.href='/report'">
+                📊 Report
+            </button>
+        </div>
+        <div class="button-container">
+            <button class="button level-button" id="my-badges-btn" onclick="window.location.href='/my-badges'">
+                🏆 My Badges
+            </button>
+            <button class="button level-button" onclick="window.location.href='/logout'" id="logout-btn">
+                🚪 Logout
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>
